@@ -1,0 +1,12 @@
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\AgodaCrawler.exe.config
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\AgodaCrawler.exe
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\AgodaCrawler.pdb
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\HtmlAgilityPack.dll
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\HtmlAgilityPack.pdb
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\bin\Debug\HtmlAgilityPack.xml
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.csprojResolveAssemblyReference.cache
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.MainForm.resources
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.Properties.Resources.resources
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.csproj.GenerateResource.Cache
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.exe
+E:\My Project\WinForm\Develop\AgodaCrawler\AgodaCrawler\obj\Debug\AgodaCrawler.pdb
