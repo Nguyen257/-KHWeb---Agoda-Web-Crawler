@@ -54,7 +54,9 @@ namespace AgodaCrawler
 
         private void btnOutput_Click(object sender, EventArgs e)
         {
-
+            HTMLPageCrawler.getAll().Wait(5000);
+            string path = @".\Output\";
+            System.Diagnostics.Process.Start(path);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
