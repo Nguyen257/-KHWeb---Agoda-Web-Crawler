@@ -8,60 +8,81 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace AgodaCrawler
 {
     public partial class MainForm : Form
     {
+        public List<string> lURL { get; set; }
         public MainForm()
         {
             InitializeComponent();
+            if(File.Exists(@"./Input.link.txt"))
+            {
+                string[] url = File.ReadAllLines(@"./Input/link.txt");
+                lURL = new List<string>(url);
+            }
         }
 
         private void btnCrawler_Click(object sender, EventArgs e)
         {
-
-            string url;
-            if (string.IsNullOrEmpty(txtUrl.Text))
+            if (lURL.Count==0)
             {
-                url = "http://www.agoda.com/vi-vn/hotel-majestic-saigon/hotel/ho-chi-minh-city-vn.html";
+                lURL.Add("http://www.agoda.com/vi-vn/hotel-majestic-saigon/hotel/ho-chi-minh-city-vn.html");
             }
-            else url = txtUrl.Text;
-
-            Stopwatch st = new Stopwatch();
-            st.Start();
-            HTMLParser pa = new HTMLParser();
-            pa.getHotelInfo(url);
-            st.Stop();
-            MessageBox.Show(st.Elapsed.ToString());
-            string output = "";
-            foreach (var v in pa.ht.comments)
+            foreach (var url in lURL)
             {
-                try
+                
+                HTMLParser pa = new HTMLParser();
+                pa.getHotelInfo(url);
+                string output = "Hotel-Name: " + pa.ht.Ten + "            Hotel-Address: " + pa.ht.DiaChi + "\n";
+                foreach (var v in pa.ht.comments)
                 {
-                    output += v.diem + "  " + v.tenUser + "\t" + v.quoctichUser + "\t" + v.thoigianNX + "\t" + v.titleNX + "\n" + v.noidungNX + "\n ______________________________________________________________________ \n";
+                    try
+                    {
+                        output += v.diem + "  " + v.tenUser + "\t" + v.quoctichUser + "\t" + v.thoigianNX + "\t" + v.titleNX + "\n" + v.noidungNX + "\n ______________________________________________________________________ \n";
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
-                catch(Exception ex)
-                {
-                    throw ex;
-                }
+                if(!Directory.Exists(@"./Output")) Directory.CreateDirectory("Output");
+
+                string outpath = @"./Output/" + GetSafeFilename(pa.ht.HotelID.ToString()).Trim() + ".txt";
+
+                File.WriteAllText(outpath,output);
+               
             }
+            System.Diagnostics.Process.Start(@".\Output\");
+            /*
             rtxt1.Text = output;
             lbName.Text = pa.ht.Ten;
             lbDiaChi.Text = pa.ht.DiaChi;
-            lbDiem.Text = pa.ht.diemNX;
+            lbDiem.Text = pa.ht.diemNX;*/
         }
+        public string GetSafeFilename(string filename)
+        {
 
+            return Path.GetInvalidFileNameChars().Aggregate(filename, (current, c) => current.Replace(c.ToString(), string.Empty));
+
+        }
         private void btnOutput_Click(object sender, EventArgs e)
         {
-            HTMLPageCrawler.getAll().Wait(5000);
-            string path = @".\Output\";
-            System.Diagnostics.Process.Start(path);
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getAll();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getLinkSearch();
         }
     }
 }

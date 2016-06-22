@@ -26,3 +26,5 @@ E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\De
 E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\Debug\System.Net.Http.Formatting.dll
 E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\Debug\Newtonsoft.Json.xml
 E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\Debug\System.Net.Http.Formatting.xml
+E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\Debug\RestSharp.dll
+E:\My Project\SourceTree-BitBucket\AgodaCrawler\AgodaCrawler\AgodaCrawler\bin\Debug\RestSharp.xml
