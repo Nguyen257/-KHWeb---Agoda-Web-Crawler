@@ -25,43 +25,7 @@ namespace AgodaCrawler
             }
         }
 
-        private void btnCrawler_Click(object sender, EventArgs e)
-        {
-            if (lURL.Count==0)
-            {
-                lURL.Add("http://www.agoda.com/vi-vn/hotel-majestic-saigon/hotel/ho-chi-minh-city-vn.html");
-            }
-            foreach (var url in lURL)
-            {
-                
-                HTMLParser pa = new HTMLParser();
-                pa.getHotelInfo(url);
-                string output = "Hotel-Name: " + pa.ht.Ten + "            Hotel-Address: " + pa.ht.DiaChi + "\n";
-                foreach (var v in pa.ht.comments)
-                {
-                    try
-                    {
-                        output += v.diem + "  " + v.tenUser + "\t" + v.quoctichUser + "\t" + v.thoigianNX + "\t" + v.titleNX + "\n" + v.noidungNX + "\n ______________________________________________________________________ \n";
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                }
-                if(!Directory.Exists(@"./Output")) Directory.CreateDirectory("Output");
-
-                string outpath = @"./Output/" + GetSafeFilename(pa.ht.HotelID.ToString()).Trim() + ".txt";
-
-                File.WriteAllText(outpath,output);
-               
-            }
-            System.Diagnostics.Process.Start(@".\Output\");
-            /*
-            rtxt1.Text = output;
-            lbName.Text = pa.ht.Ten;
-            lbDiaChi.Text = pa.ht.DiaChi;
-            lbDiem.Text = pa.ht.diemNX;*/
-        }
+        
         public string GetSafeFilename(string filename)
         {
 
@@ -70,8 +34,11 @@ namespace AgodaCrawler
         }
         private void btnOutput_Click(object sender, EventArgs e)
         {
-            HTMLPageCrawler cr = new HTMLPageCrawler();
-            cr.getAll();
+            string path = @".\Output\";
+            if (Directory.Exists(path))
+            {
+                System.Diagnostics.Process.Start(path);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -79,10 +46,80 @@ namespace AgodaCrawler
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string path = @".\Input\";
+            if(Directory.Exists(path))
+            {
+                System.Diagnostics.Process.Start(path);
+                
+            }
+        }
+
+        
+        private void btnCountry_Click(object sender, EventArgs e)
         {
             HTMLPageCrawler cr = new HTMLPageCrawler();
-            cr.getLinkSearch();
+            cr.getCountrySearch();
         }
+
+        private void btnRegion_Click(object sender, EventArgs e)
+        {
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getRegionLink(rtxt1);
+        }
+
+        private void btnCityL_Click(object sender, EventArgs e)
+        {
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getCityLink(rtxt1);
+            
+        }
+
+        private void btnCityID_Click(object sender, EventArgs e)
+        {
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getCityID(rtxt1);
+        }
+
+        private void btnHotelID_Click(object sender, EventArgs e)
+        {
+            HTMLPageCrawler cr = new HTMLPageCrawler();
+            cr.getAllHotelID(rtxt1);
+        }
+
+        private void btnCrawlerComment_Click(object sender, EventArgs e)
+        {
+            HTMLParser paCrawler = new HTMLParser();
+            paCrawler.getHotelComments();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                
+                HTMLParser paCrawler = new HTMLParser();
+                Hotel ht = new Hotel();
+                ht = paCrawler.PaserHotel(ofd.FileName);
+                string strOutput = "";
+                strOutput += " Tên Khách sạn : " + ht.Ten + "\n ID của Khách sạn : " + ht.HotelID.ToString() + "\n Đường dẫn của Khách sạn : " + ht.hUrl 
+                    +"\n ______________________________________\n";
+                foreach(var v in ht.comments)
+                {
+                    strOutput += " Số Điểm đánh giá : " + v.diem.ToString() + "\t - Tên Người đánh giá : " + v.tenUser
+                        + "\n Quốc tịch của User : " + v.quoctichUser + "\t Thời gian đánh giá : " + v.thoigianNX
+                        + "\n Title của Nhận xét : " + v.titleNX
+                        + "\n Comment-Positive : " + v.commentText
+                        + "\n Nội dung comment " + v.noidungNX + "\n ______________________________________\n";
+                }
+                rtxt1.Text = strOutput ;
+            }
+        }
+
+
+        
     }
 }

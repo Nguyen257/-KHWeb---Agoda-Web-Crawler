@@ -73,9 +73,9 @@
     <Compile Include="Hotel.cs" />
     <Compile Include="HTMLPageCrawler.cs" />
     <Compile Include="HTMLParser.cs" />
+    <Compile Include="JsonClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestParams.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

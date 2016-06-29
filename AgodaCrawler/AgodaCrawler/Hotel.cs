@@ -14,6 +14,7 @@ namespace AgodaCrawler
         public string KhuVuc { get; set; }
         public int soPhong { get; set; }
         public string diemNX { get; set; }
+        public string hUrl { get; set; }
         public List<Comment> comments { get; set; }
 
         public Hotel()
@@ -24,6 +25,7 @@ namespace AgodaCrawler
             KhuVuc = "";
             soPhong = -1;
             diemNX = "";
+            hUrl = "";
             comments = new List<Comment>() ;
         }
     }

@@ -14,6 +14,7 @@ namespace AgodaCrawler
         public string quoctichUser { get; set; }
         public string thoigianNX { get; set; }
         public string titleNX { get; set; }
+        public string commentText { get; set; }
         public string noidungNX { get; set; }
 
         public Comment ()
@@ -24,6 +25,7 @@ namespace AgodaCrawler
             quoctichUser = "None";
             thoigianNX = "1/1/1900";
             titleNX = "";
+            commentText = "";
             noidungNX = "";
         }
     }
